@@ -5,6 +5,7 @@
   "authors": [
     "Themba Fletcher <themba.fletcher@appirio.com>"
   ],
+  "main": "",
   "ignore": [
     "**/.*",
     "node_modules",
