@@ -5,7 +5,7 @@
   "authors": [
     "Themba Fletcher <themba.fletcher@appirio.com>"
   ],
-  "main": "",
+  "main": ["ng-route-timing/dist/newrelic.js", "browser/script.jade"],
   "ignore": [
     "**/.*",
     "node_modules",
