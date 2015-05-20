@@ -1,0 +1,15 @@
+{
+  "name": "ap-newrelic",
+  "description": "Appirio Work Item Platform",
+  "version": "0.0.1",
+  "scripts": {},
+  "dependencies": {
+    "node-env-file": "^0.1.7"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-load-plugins": "^0.7.0",
+    "gulp-task-listing": "^1.0.0",
+    "gulp-concat": "^2.5.2"
+  }
+}

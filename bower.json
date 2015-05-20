@@ -1,0 +1,15 @@
+{
+  "name": "ap-newrelic",
+  "version": "0.0.1",
+  "homepage": "https://github.com/appirio-tech/ap-newrelic",
+  "authors": [
+    "Themba Fletcher <themba.fletcher@appirio.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

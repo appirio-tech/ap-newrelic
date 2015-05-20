@@ -1,0 +1,22 @@
+- function getEnv(name) {
+-   var value = process.env[name]; 
+-   return value && value.trim();
+- }
+
+- var licenseKey = getEnv('NEWRELIC_LICENSE_KEY');
+- var applicationID = getEnv('NEWRELIC_APPLICATION_ID');
+- var hasConfig = licenseKey && applicationID;
+
+if hasConfig
+  - console.log("NEWRELIC: Found License Key: " + licenseKey);
+  - console.log("NEWRELIC: Found Application ID: " + applicationID);
+  - console.log("NEWRELIC: Including Newrelic browser script");
+  script
+    include vendor.js
+    | ;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"
+    = licenseKey
+    |",applicationID:"
+    = applicationID
+    |",sa:1,agent:"js-agent.newrelic.com/nr-632.min.js"}
+else
+  - console.log("NEWRELIC: Environment variables not found. Skipping browser script");
