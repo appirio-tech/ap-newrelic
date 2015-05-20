@@ -5,7 +5,7 @@
 
   /* @ngInject */
   function appRun($rootScope, NewRelicService) {
-    $rootScope.$on("$stateChangeSuccess", NewRelicService.reportCurrentRoute);
+    $rootScope.$on("$stateChangeStart", NewRelicService.reportCurrentRoute);
   }
 
   angular

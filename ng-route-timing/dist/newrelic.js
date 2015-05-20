@@ -7,32 +7,54 @@
 
 (function () {
   "use strict";
-  
+
   angular
     .module("newrelic")
     .factory("NewRelicService", NewRelicService);
 
-  NewRelicService.$inject = ["$location"];
+  NewRelicService.$inject = ["$location", "$timeout"];
 
   /* @ngInject */
-  function NewRelicService($location) {
+  function NewRelicService($location, $timeout) {
 
-    var noop = function () {};
-    var actionName = "routeChange";
     var service = {
-      reportCurrentRoute: noop
+      reportCurrentRoute: null,
+    };
+
+    var actionName = "routeChange";
+
+    var nr = {
+      reportRoute: function (route, renderTime) {}
     };
 
     if (window.newrelic) {
 
-      service.reportCurrentRoute = function () {
-        console.log($location.url())
-        newrelic.addPageAction(actionName, {
-          url: $location.url()
-        });
-      }
+      nr.reportRoute = function (route, renderTime) {
+        var details = {
+          url: route
+        };
+        if (renderTime) details.renderTime = renderTime;
+
+        window.newrelic.addPageAction(actionName, details);
+        console.log("Route Loaded.", details);
+      };
 
     }
+
+    function deferReportRoute(route, startTime) {
+      return function () {
+        var now = new Date();
+        nr.reportRoute(route, now - startTime);
+      };
+    }
+
+    service.reportCurrentRoute = function () {
+      var now = new Date();
+      var url = $location.url();
+      // Passing false as the 3rd param to $timeout keeps the deferred function from running during $apply block
+      // https://docs.angularjs.org/api/ng/service/$timeout
+      $timeout(deferReportRoute(url, now), 0, false);
+    };
 
     return service;
   }
@@ -45,7 +67,7 @@
 
   /* @ngInject */
   function appRun($rootScope, NewRelicService) {
-    $rootScope.$on("$stateChangeSuccess", NewRelicService.reportCurrentRoute);
+    $rootScope.$on("$stateChangeStart", NewRelicService.reportCurrentRoute);
   }
 
   angular
