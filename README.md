@@ -9,7 +9,13 @@
 
 * ```bower install --save git@github.com:appirio-tech/ap-newrelic```
 * Or add the following line to your bower.json under dependencies, then ```bower install```
-  ```"ap-newrelic": "git@github.com:appirio-tech/ap-newrelic#master"```
+
+```
+  "dependencies": {
+    ...
++   "ap-newrelic": "git@github.com:appirio-tech/ap-newrelic#master"
+  }
+```
 
 ### .env
 
@@ -41,6 +47,7 @@ template is rendered.
 ### Include angular route reporting and render timing
 
 * app.module.js
+
 ```
   angular.module('app', [
     ...
@@ -48,7 +55,7 @@ template is rendered.
   ]).whatever( ...
 ```
 
-* index.jade:
+* index.jade
 
 Include ```/bower_components/ap-newrelic/ng-route-timing/dist/newrelic``` when you include your angular modules.
 
