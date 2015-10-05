@@ -36,7 +36,6 @@
         if (renderTime) details.renderTime = renderTime;
 
         window.newrelic.addPageAction(actionName, details);
-        console.log("Route Loaded.", details);
       };
 
     }
